@@ -29,7 +29,6 @@ jobs:
         with:
           fetch-depth: 0
           ref: test
-          token: ${{ secrets.RELEASE_TOKEN }}
 
       - name: Verify main is ancestor of test
         run: |
