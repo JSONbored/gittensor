@@ -9,9 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Enforce source = test for PRs into main
+        env:
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
-          if [ "${{ github.event.pull_request.head.ref }}" != "test" ]; then
-            echo "::error::PRs into main must originate from 'test'. Head is '${{ github.event.pull_request.head.ref }}'."
+          if [ "$PR_HEAD_REF" != "test" ]; then
+            echo "::error::PRs into main must originate from 'test'. Head is '$PR_HEAD_REF'."
             echo "::error::Open your PR against 'test' instead. main only advances via the Release workflow."
             exit 1
           fi
